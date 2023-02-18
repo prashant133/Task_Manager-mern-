@@ -1,3 +1,12 @@
 // note
 1. first create a package.json file with (npm init -y) command.
 2. install express frame-work with command (npm i express)
+3. creata script file in json file with nodemon
+    test the script file you have created with (1.npm start
+                                                2. npm run backend)// as i have backend dir we use this command.
+4. setup postman for api testing
+5. setup mongodb
+6. setup env file (install dotenv using npm i dotenv)  (so that the mongodb file cannot be access by others) URI (unifrom resource identifer).
+7. install mongoose (use to connect to the mongodb)
+
+
