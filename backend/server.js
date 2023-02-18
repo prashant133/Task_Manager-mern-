@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config();// this gives the access to the env fi
 const express = require("express")
 const connectDB = require("./config/connectDB") // importing connectDb file from config
 const app = express();
+const mongoose = require("mongoose");
 
 
 // creating an routes
@@ -20,10 +21,21 @@ const PORT =process.env.PORT || 5000; // when we deploy to heruko server gonna l
 
 
                                       
+// second way to connect to the database
+mongoose
+    .connect(process.env.MONGO_URI)
+    //before conneting to the server we have to connect to the mongodb first.
+    .then(()=> {
+        app.listen(PORT, () => {
+            console.log(`serving running on ${PORT} port`)
+        })
+    })
+    .catch((err) => console.log(err));
+
 
 
 // this below code of line means connect to the database before firing the sever
-const startServer = async () => {
+/* const startServer = async () => {
     try {
         await connectDB();
         app.listen(PORT, () => {
@@ -35,4 +47,4 @@ const startServer = async () => {
     }
 };
 
-startServer();
+startServer(); */
