@@ -12,7 +12,7 @@ app .get("/", (req,res)=>{
 
 
 
-connectDB(); // invoking the function from connectDb.js file
+
 
 
 const PORT =process.env.PORT || 5000; // when we deploy to heruko server gonna look for the port...
@@ -20,6 +20,19 @@ const PORT =process.env.PORT || 5000; // when we deploy to heruko server gonna l
 
 
                                       
-app.listen(PORT, () => {
-    console.log(`serving running on ${PORT} port`)
-})
+
+
+// this below code of line means connect to the database before firing the sever
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(PORT, () => {
+            console.log(`serving running on ${PORT} port`)
+        })
+    } catch (error) {
+        console.log(error)
+        
+    }
+};
+
+startServer();
