@@ -8,7 +8,9 @@ const connectDB = require("./config/connectDB") // importing connectDb file from
 
 const mongoose = require("mongoose");
 
-const Task = require("./model/taskmodel");// importing taskmodles from model dir
+const Task = require("./model/taskModel");// importing taskModel from model dir
+
+const taskRoutes =  require("./routes/taskRoute")
 
 
 // middeware is the function that has the acess to ther request,response of the route and also has next function.
@@ -19,25 +21,19 @@ app.use(express.json())// takes the value from the api body.
 //     next();
 
 // }
+app.use(taskRoutes); // taken from the routes
 
 
 
 // creating an routes
 //home page
-app .get("/", (req,res)=>{
+app.get("/", (req,res)=>{
     res.send("home page");
 })
-// task route
-app.post("/api/tasks"  ,async (req,res)=>{
-    // saving data to database
-    try {
-        const task = await Task.create(req.body);
-        res.status(200).json(task);
-    } catch (error) {
-        res.status(500).json({msg: error.message})
-    }
-    
-})
+
+
+
+
 
 
 
