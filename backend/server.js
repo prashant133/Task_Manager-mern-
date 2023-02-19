@@ -1,9 +1,14 @@
 
 const dotenv = require("dotenv").config();// this gives the access to the env file for server.js so that we could connect mongoDB.
+
 const express = require("express")
-const connectDB = require("./config/connectDB") // importing connectDb file from config
 const app = express();
+
+const connectDB = require("./config/connectDB") // importing connectDb file from config
+
 const mongoose = require("mongoose");
+
+const Task = require("./model/taskmodel");// importing taskmodles from model dir
 
 
 // middeware is the function that has the acess to ther request,response of the route and also has next function.
@@ -24,8 +29,13 @@ app .get("/", (req,res)=>{
 })
 // task route
 app.post("/api/tasks"  ,async (req,res)=>{
-    console.log(req.body);
-    res.send("task created")
+    // saving data to database
+    try {
+        const task = await Task.create(req.body);
+        res.status(200).json(task);
+    } catch (error) {
+        res.status(500).json({msg: error.message})
+    }
     
 })
 
