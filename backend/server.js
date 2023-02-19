@@ -6,10 +6,29 @@ const app = express();
 const mongoose = require("mongoose");
 
 
+// middeware is the function that has the acess to ther request,response of the route and also has next function.
+app.use(express.json())// takes the value from the api body.
+// const logger = (req,res,next) => {
+//     console.log("middle ware ran");
+//     console.log(req.method);
+//     next();
+
+// }
+
+
+
 // creating an routes
+//home page
 app .get("/", (req,res)=>{
     res.send("home page");
 })
+// task route
+app.post("/api/tasks"  ,async (req,res)=>{
+    console.log(req.body);
+    res.send("task created")
+    
+})
+
 
 
 
