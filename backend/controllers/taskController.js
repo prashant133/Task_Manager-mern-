@@ -20,6 +20,21 @@ const getTasks = async(req,res) =>{
     }
 }
 
+const getTask = async(req,res) => {
+    // getting a single task from the database
+    try {
+        const {id} = req.params;
+        const task = await Task.findById(id);
+        // if data is not found in the database.
+        if(!task){
+            return res.status(404).json(`No task with id: ${ id }`);
+        }
+        res.status(200).json(task);
+    } catch (error) {
+        res.status(500).json({msg: error.message});
+    }
+}
+
 module.exports = {
-    createTask,getTasks
+    createTask,getTasks,getTask
 }
