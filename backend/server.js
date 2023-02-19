@@ -8,7 +8,7 @@ const connectDB = require("./config/connectDB") // importing connectDb file from
 
 const mongoose = require("mongoose");
 
-const Task = require("./model/taskModel");// importing taskModel from model dir
+const Task = require("./models/taskModel");// importing taskModel from model dir
 
 const taskRoutes =  require("./routes/taskRoute")
 
