@@ -9,4 +9,11 @@
 6. setup env file (install dotenv using npm i dotenv)  (so that the mongodb file cannot be access by others) URI (unifrom resource identifer).
 7. install mongoose (use to connect to the mongodb)
 
+8. to create a react app used this command
+    (npx create-react-app <dirname>)
+    after you installed the app. install the path in server.js file in script like we did for the backend
+    then go to the frontend dir and install some package
+    1. npm i axios react-icons react-toastify
+    2. npm i node-sass
+
 
