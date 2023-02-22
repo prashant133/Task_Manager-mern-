@@ -15,5 +15,6 @@
     then go to the frontend dir and install some package
     1. npm i axios react-icons react-toastify
     2. npm i node-sass
-
+9. install the follwoing packge to run the backend and the frontend at the sametime
+    1. npm i concurrently -D
 
