@@ -56,6 +56,30 @@ const deleteTask = async(req,res) =>{
     }
 
 }
+
+// update a task
+//we can use put or patch method to update the task
+// if we are using patch then we can choose only one property to update. likewise if i want to update the complete default value to true then we use patch.
+// when you are updating any thing in the database the validdation you provided in schema does not apply unless you use runValidators method
+
+const updateTask = async(req,res) => {
+    try {
+        const {id} = req.params;
+        const task = await Task.findByIdAndUpdate(
+            {_id: id,},req.body,{new:true,runValidators:true}
+        );
+        if(!task){
+            return res.status(404).json(`No task with id: ${ id }`);
+        }
+        res.status(200).json(task)
+
+    } catch (error) {
+        res.status(500).json({msg: error.message});
+        
+    }
+
+}
+
 module.exports = {
-    createTask,getTasks,getTask,deleteTask
+    createTask,getTasks,getTask,deleteTask,updateTask
 }
