@@ -1,11 +1,20 @@
+import {FaCheckDouble,FaEdit, FaRegTrashAlt} from "react-icons/fa"
 
-
-const task = () => {
+const Task = () => {
   return (
-    <div>
-        <h2>task</h2>
+    <div className="task">
+        <p>
+          <b>1.</b>
+          Task 1
+        </p>
+        <div className="task-icons">
+          <FaCheckDouble color="green"/>
+          <FaEdit color="purple"/>
+          <FaRegTrashAlt color="red"/>
+        </div>
+        
     </div>
   )
 }
 
-export default task
+export default Task
