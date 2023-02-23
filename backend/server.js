@@ -11,6 +11,9 @@ const mongoose = require("mongoose");
 const Task = require("./models/taskModel");// importing taskModel from model dir
 
 const taskRoutes =  require("./routes/taskRoute")
+const cors = require("cors")
+
+
 
 
 // middeware is the function that has the acess to ther request,response of the route and also has next function.
@@ -21,6 +24,7 @@ app.use(express.json())// takes the value from the api body.
 //     next();
 
 // }
+app.use(cors());
 app.use(taskRoutes); // taken from the routes
 
 
