@@ -58,11 +58,22 @@ const TaskList = () => {
       await axios.post(`${URL}/api/tasks`,formData)// provide the from data to the server
       setFormData({...formData,name:""})// clear the form data in the UI
       toast.success('Task Added Successfully');
+      getTasks();
   } catch (error) {
     toast.error(error.message);
     
   }
   };
+
+  const deleteTask = async (id) => {
+    try {
+      await axios.delete(`${URL}/api/tasks/${id}`)
+      getTasks()//reload the page
+    } catch (error) {
+      toast.error(error.message)
+      
+    }
+  }
   return (
     <div>
       <h2>Task Manager</h2>
@@ -91,7 +102,10 @@ const TaskList = () => {
           <>
           {tasks.map((task,index) =>{
             return (
-              <Task key={task._id} task={task} index={index}/>
+              <Task 
+              key={task._id} task={task} 
+              index={index} 
+              deleteTask={deleteTask}/>
             )
           })}
           </>
