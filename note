@@ -19,4 +19,5 @@
     1. npm i concurrently -D
 10. to commnitcate bdtween the url use
     cors(npm i cors)
+11. proxy url // when we deploy the app to heruko we gonna get get network error so to communicate with it we use proxy url
 
