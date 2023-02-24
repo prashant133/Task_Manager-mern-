@@ -104,11 +104,28 @@ const TaskList = () => {
       
     }
 
+  };
+
+  const setToComplete = async (task) =>{
+    const newFormData = {
+      name: task.name ,
+      completed: true,
+    }
+    try {
+      await axios.put(`${URL}/api/tasks/${task._id}`,newFormData)// newFormData is the data the is to be updated here that means it gonna change into completed.
+      getTasks();
+      
+    } catch (error) {
+      toast.error(error.message);
+      
+    }
   }
+
+
   return (
     <div>
       <h2>Task Manager</h2>
-      <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEditing={isEditing} updateTask={updateTask}/>
+      <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEditing={isEditing} updateTask={updateTask} />
       <div className="--flex-between --pb">
         <p>
           <b>Total Tasks: </b> 0
@@ -138,7 +155,8 @@ const TaskList = () => {
               index={index} 
               deleteTask={deleteTask}
               getSingleTask={getSingleTask}
-              updateTask={updateTask}/>
+              updateTask={updateTask}
+              setToComplete={setToComplete}/>
             )
           })}
           </>
