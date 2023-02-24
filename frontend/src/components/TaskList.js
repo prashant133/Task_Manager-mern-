@@ -9,7 +9,7 @@ import loadingImg from "../assests/loader.gif"
 
 
 const TaskList = () => {
-
+// states
   const [tasks,setTasks] = useState([])// the data will be saved when we fetch the data from the data base.
   const [completedTasks,setCompletedTasks] = useState([])// completed data will be saved.
   const [isLoading,setIsLoading] = useState(false)
@@ -20,6 +20,9 @@ const TaskList = () => {
   })
   const {name} = formData //destructing the name property so that we can use it later
 
+  //states for update
+  const [isEditing,setIsEditing] = useState(false)
+  const [taskId ,setTaskID] = useState("")
 
   // submit the form
   const handleInputChange = (e) =>{
@@ -47,7 +50,7 @@ const TaskList = () => {
   }, [])
   
 
-
+// create a task
   const createTask = async (e) => {
     e.preventDefault()
     //if name not provided then error using toastify
@@ -65,6 +68,7 @@ const TaskList = () => {
   }
   };
 
+  //deletet the task
   const deleteTask = async (id) => {
     try {
       await axios.delete(`${URL}/api/tasks/${id}`)
@@ -74,10 +78,37 @@ const TaskList = () => {
       
     }
   }
+
+  // update the task
+  const getSingleTask = async(task) =>{
+    setFormData({name : task.name, completed : false });
+    setTaskID(task._id);
+    setIsEditing(true);
+
+  }
+
+  const updateTask = async(e) =>{
+    e.preventDefault()
+    if(name===""){
+      return toast.error("Input field cannot be empty")
+    }
+    try {
+      await axios.put(`${URL}/api/tasks/${taskId}`,formData)// takes the data of taskId then update it to the formdata
+      setFormData({...formData,name:""})
+      setIsEditing(false);
+      getTasks();//refresh the task in the page
+      toast.success("Task updated successfully")
+    } catch (error) {
+      toast.error(error.message);
+
+      
+    }
+
+  }
   return (
     <div>
       <h2>Task Manager</h2>
-      <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask}/>
+      <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEditing={isEditing} updateTask={updateTask}/>
       <div className="--flex-between --pb">
         <p>
           <b>Total Tasks: </b> 0
@@ -105,7 +136,9 @@ const TaskList = () => {
               <Task 
               key={task._id} task={task} 
               index={index} 
-              deleteTask={deleteTask}/>
+              deleteTask={deleteTask}
+              getSingleTask={getSingleTask}
+              updateTask={updateTask}/>
             )
           })}
           </>
