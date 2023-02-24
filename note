@@ -21,3 +21,9 @@
     cors(npm i cors)
 11. proxy url // when we deploy the app to heruko we gonna get get network error so to communicate with it we use proxy url
 
+------------------------------------------------------------------------------------------------------------------------------------------------------
+TO DELPOY THE APP IN RENDER
+->checks the cors in the server.js file before doing the follow process. and set to localhost:3000 for frotend and anthhing for the render.
+1 .make the repo for both frontend and backend.
+2. then push the code seperately.
+3. 
