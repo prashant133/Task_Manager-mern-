@@ -105,7 +105,7 @@ const TaskList = () => {
     }
 
   };
-
+// to set the task to complete
   const setToComplete = async (task) =>{
     const newFormData = {
       name: task.name ,
@@ -121,20 +121,39 @@ const TaskList = () => {
     }
   }
 
+  // to check  the completed task
+  useEffect(()=>{
+    const cTask = tasks.filter((task)=>{
+      return task.completed === true;
+    })
+    setCompletedTasks(cTask);
+  },[tasks])
+
 
   return (
     <div>
       <h2>Task Manager</h2>
-      <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEditing={isEditing} updateTask={updateTask} />
-      <div className="--flex-between --pb">
+      <TaskForm name={name} 
+      handleInputChange={handleInputChange}
+       createTask={createTask} 
+       isEditing={isEditing} 
+       updateTask={updateTask} 
+       
+       />
+      {tasks.length > 0 && ( // if there is any task in in the page in it shows the follwoing markup.
+        <div className="--flex-between --pb">
         <p>
-          <b>Total Tasks: </b> 0
+          <b>Total Tasks: </b> {tasks.length}
         </p>
         <p>
-          <b>Completed Tasks: </b> 0
+          <b>Completed Tasks: </b> {completedTasks.length}
         </p>
 
       </div>
+      )}
+
+
+      
       <hr/>
       {
         isLoading && (
